@@ -8,6 +8,7 @@ gcloud config set project ${PROJECT_NAME}
 gcloud services enable resourcesettings.googleapis.com
 gcloud services enable iam.googleapis.com
 gcloud services enable iamcredentials.googleapis.com
+gcloud services enable dataproc.googleapis.com
 
 gcloud iam service-accounts create "${SA_NAME}" \
     --description="This service account allows us to invoke cloud services using github" \
