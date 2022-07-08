@@ -24,18 +24,20 @@ resource "google_dataproc_cluster" "de_dataproc_cluster" {
         num_local_ssds    = 0
       }
     }
-
     worker_config {
-      num_instances    = var.DATAPROC_WORKERS
+      num_instances = var.DATAPROC_WORKERS
     }
     software_config {
       image_version = "2.0-debian10"
 
-      optional_components = [ "JUPYTER" ]
+      optional_components = ["JUPYTER"]
 
       override_properties = {
         "dataproc:dataproc.allow.zero.workers" = "true"
       }
+    }
+    endpoint_config {
+      enable_http_port_access = "true"
     }
   }
 }
