@@ -12,7 +12,12 @@ resource "google_storage_bucket" "de_first_bucket" {
 resource "google_dataproc_cluster" "de_dataproc_cluster" {
   name   = "nerd-de-dpcluster-${random_integer.unique_num.result}"
   region = local.GCP_REGION
+  provider = google-beta
   cluster_config {
+    endpoint_config {
+      enable_http_port_access = "true"
+    }
+    
     master_config {
       num_instances    = 1
       machine_type     = "n1-standard-2"
@@ -36,8 +41,6 @@ resource "google_dataproc_cluster" "de_dataproc_cluster" {
         "dataproc:dataproc.allow.zero.workers" = "true"
       }
     }
-    endpoint_config {
-      enable_http_port_access = "true"
-    }
+
   }
 }
